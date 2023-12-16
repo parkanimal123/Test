@@ -1,0 +1,38 @@
+package practical;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
+public class objectpresent{
+
+    static String driverPath = "F:\\STQA\\eclipse tycs\\geckodriver.exe";
+    static String PATH_PORT = "webdriver.firefox.port";
+
+    public static void main(String[] args) {
+
+        System.setProperty("webdriver.gecko.driver", driverPath);
+
+        FirefoxProfile fp = new FirefoxProfile();
+        fp.setPreference(PATH_PORT, "7055");
+        FirefoxOptions options = new FirefoxOptions();
+        options.setProfile(fp);
+        WebDriver driver = new FirefoxDriver(options);
+
+        driver.get("https://accounts.google.com");
+        driver.manage().window().maximize();
+
+        java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
+
+        System.out.println("Total Links are: " + links.size());
+
+        for (int i = 0; i < links.size(); i++) {
+            System.out.println("Link " + i + " Link name " + links.get(i).getText());
+        }
+
+        driver.quit();
+    }
+}
